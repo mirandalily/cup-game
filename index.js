@@ -20,10 +20,3 @@ $('#aboutNav').on('click', function(event) {
   $('#highscores').hide();
   $('#main').hide();
 });
-
-$('#highscores').on('click', function(event) {
-  event.preventDefault();
-  $('#about').hide();
-  $('#highscores').show();
-  $('#main').hide();
-});
