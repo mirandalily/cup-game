@@ -64,9 +64,10 @@ text-align: center;
 }
 header{
  padding: 10px;
+ margin: 0 auto;
+ margin-left: 15%;
+ margin-right: 15%;
  margin-top: 50px;
- margin-left: 300px;
- margin-right: 300px;
  background: #003459;
  font-size: 21px;
  font-weight: bold;
@@ -142,4 +143,10 @@ select {
   flex-direction: column;
 }
 
-
+@media screen and (min-width: 820px) {
+  header{
+   margin: 0 auto;
+   margin-left: 25%;
+   margin-right: 25%;
+   margin-top: 50px;
+}
