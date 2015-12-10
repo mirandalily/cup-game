@@ -76,6 +76,7 @@ header{
  border-radius: 10px;
  box-shadow: 0 0 0 4px #003459, 2px 1px 6px 4px rgba(10, 10, 0, 0.5);
  font-weight: normal;
+ list-style-type: none;
 }
 h1, h3{
   color: white;
