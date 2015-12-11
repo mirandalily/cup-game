@@ -64,9 +64,10 @@ text-align: center;
 }
 header{
  padding: 10px;
+ margin: 0 auto;
+ margin-left: 15%;
+ margin-right: 15%;
  margin-top: 50px;
- margin-left: 300px;
- margin-right: 300px;
  background: #003459;
  font-size: 21px;
  font-weight: bold;
@@ -75,6 +76,7 @@ header{
  border-radius: 10px;
  box-shadow: 0 0 0 4px #003459, 2px 1px 6px 4px rgba(10, 10, 0, 0.5);
  font-weight: normal;
+ list-style-type: none;
 }
 h1, h3{
   color: white;
@@ -142,4 +144,10 @@ select {
   flex-direction: column;
 }
 
-
+@media screen and (min-width: 820px) {
+  header{
+   margin: 0 auto;
+   margin-left: 25%;
+   margin-right: 25%;
+   margin-top: 50px;
+}
