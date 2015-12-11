@@ -23,18 +23,18 @@ var Shuffler = {
 
   getOptions: function() {
     var query = window.location.search.substring(1);
-    var vars = query.split("&");
+    var vars = query.split('&');
     for (var i=0; i<vars.length; i++) {
-      var pair = vars[i].split("=");
-      this.options[i] = pair[1]
+      var pair = vars[i].split('=');
+      this.options[i] = pair[1];
     }
   },
 
   parseOptions: function(options) {
-    if (this.options[1] === "Slow") {
+    if (this.options[1] === 'Slow') {
       speed = 450;
       speedFactor = 500;
-    } else if (this.options[1] === "Medium") {
+    } else if (this.options[1] === 'Medium') {
       speed = 350;
       speedFactor = 1000;
     } else {
@@ -52,32 +52,32 @@ var Shuffler = {
       spotOne.children[0].setAttribute('id', 'winner');
       spotOne.children[0].children[0].src = 'images/slash/owlslash250.png';
       setTimeout(function(){
-      spotOne.children[0].children[0].src = 'images/slash/slash250.png'
+        spotOne.children[0].children[0].src = 'images/slash/slash250.png';
       },1000);
     } else if(randomNumber === 1){
       spotTwo.children[0].setAttribute('id', 'winner');
-      spotTwo.children[0].children[0].src = 'images/slash/owlslash250.png'
+      spotTwo.children[0].children[0].src = 'images/slash/owlslash250.png';
       setTimeout(function(){
-      spotTwo.children[0].children[0].src = 'images/slash/slash250.png'
+        spotTwo.children[0].children[0].src = 'images/slash/slash250.png';
       },1000);
     } else if(randomNumber === 2){
       spotThree.children[0].setAttribute('id', 'winner');
-      spotThree.children[0].children[0].src = 'images/slash/owlslash250.png'
+      spotThree.children[0].children[0].src = 'images/slash/owlslash250.png';
       setTimeout(function(){
-      spotThree.children[0].children[0].src = 'images/slash/slash250.png'
+        spotThree.children[0].children[0].src = 'images/slash/slash250.png';
       },1000);
     }
   },
 
-  shuffle: function(s, i) {
-     setTimeout(function () {
-        Shuffler.pickRandomShuffle();
-        if (--i) {
-          Shuffler.shuffle(speed, i);
-        } else {
-          guessing = true;
-        }
-     }, s)
+  shuffle: function(s,i) {
+    setTimeout(function() {
+      Shuffler.pickRandomShuffle();
+      if (--i) {
+        Shuffler.shuffle(speed, i);
+      } else {
+        guessing = true;
+      }
+    }, s);
   },
 
   runGame: function() {
@@ -85,7 +85,7 @@ var Shuffler = {
     this.parseOptions(this.options);
     this.assignRightAnswer();
     setTimeout(function() {
-      Shuffler.shuffle(speed, shuffles)}, 1000)
+      Shuffler.shuffle(speed, shuffles);}, 1000);
   },
 
   pickRandomShuffle: function() {
@@ -107,7 +107,7 @@ var Shuffler = {
       childOfSpotThree.style.animation = null;
       spotOne.appendChild(childOfSpotThree);
       spotThree.appendChild(childOfSpotOne);
-    }, this.classTime)
+    }, this.classTime);
   },
 
   animateSecondToOne: function(childOfSpotOne, childOfSpotTwo) {
@@ -118,7 +118,7 @@ var Shuffler = {
       childOfSpotOne.style.animation = null;
       spotOne.appendChild(childOfSpotTwo);
       spotTwo.appendChild(childOfSpotOne);
-    }, this.classTime)
+    }, this.classTime);
   },
 
   animateSecondToThird: function(childOfSpotTwo, childOfSpotThree) {
@@ -129,7 +129,7 @@ var Shuffler = {
       childOfSpotThree.style.animation = null;
       spotTwo.appendChild(childOfSpotThree);
       spotThree.appendChild(childOfSpotTwo);
-    }, this.classTime)
+    }, this.classTime);
   }
 };
 
@@ -256,3 +256,5 @@ setTimeout(function(){
   Shuffler.runGame();
 }, 500);
 
+checkLocal();
+makeTable();
