@@ -22,7 +22,7 @@ webDB.init = function() {
   try {
     if (openDatabase) {
       webDB.verbose(true);
-      webDB.connect('blogDB', 'Blog Database', 5*1024*1024);
+      webDB.connect('cupGameDB', 'Cup Game Database', 5*1024*1024);
       webDB.setupTables();
     } else {
       console.log('Web Databases not supported.');
