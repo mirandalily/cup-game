@@ -1,5 +1,7 @@
-var table = document.getElementsByTagName('table')[0];
-var tbody = document.getElementsByTagName('tbody')[0];
+webDB.init();
+
+var table = $('table')[0];
+var tbody = $('tbody')[0];
 var scores;
 
 function makeTable(){
@@ -20,6 +22,46 @@ function makeTable(){
   }
 }
 
+var createSQL = function(callback) {
+  webDB.execute(
+    [
+      {
+        'sql': 'CREATE TABLE IF NOT EXISTS highscores ( id INT, n TEXT, s INT, PRIMARY KEY (id));',
+      },
+    ],
+    callback
+  );
+};
+
+var countSQL = function() {
+  webDB.execute(
+    [
+      {
+        sql: 'SELECT COUNT(*) FROM highscores'
+      },
+    ],
+    function(data) {
+      var count = data[0]['COUNT(*)'];
+      if(count === 0) {
+        insertSQL();
+      }
+    }
+  );
+};
+
+var insertSQL = function(callback) {
+  webDB.execute(
+    [
+      {
+        'sql': 'INSERT INTO highscores (n, s) VALUES (?, ?), (?, ?), (?, ?), (?, ?), (?, ?);',
+        'data': ['AAA', 1000, 'ABB', 1200, 'BBB', 1400, 'CCC', 1600, 'DDD', 1800],
+      },
+    ],
+    callback
+  );
+};
+
+
 function checkLocal() {
   if (localStorage.scores){
     scores = JSON.parse(localStorage.scores);
@@ -28,5 +70,8 @@ function checkLocal() {
   }
 }
 
-checkLocal();
-makeTable();
+$(document).ready(function() {
+  checkLocal();
+  makeTable();
+  createSQL(countSQL);
+});

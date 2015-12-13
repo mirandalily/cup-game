@@ -1,3 +1,4 @@
+webDB.init();
 var spotOne = document.getElementById('spotOne');
 var spotTwo = document.getElementById('spotTwo');
 var spotThree = document.getElementById('spotThree');
@@ -133,6 +134,18 @@ var Shuffler = {
   }
 };
 
+var newInsertSQL = function(callback) {
+  webDB.execute(
+    [
+      {
+        'sql': 'INSERT INTO highscores (n, s) VALUES (?, ?);',
+        'data' : [this.n, this.s],
+      },
+    ],
+    callback
+  );
+};
+
 var Responder = {
   feedback: document.getElementById('feedback'),
   popup: document.getElementById('popup'),
@@ -140,7 +153,7 @@ var Responder = {
   winHS: function() {
     this.popup.setAttribute('class', 'popup');
     this.feedback.innerHTML = '<p class="win">New High Score! <br />Your score is ' + score + '.<br />Whooo are you?.</p> <br /><form id="form"><input id="username" type="text" name="player" placeholder="---" maxlength="3"> <br /> <input id="submitun" type ="submit" value="submit"></form>';
-    this.formListen();
+    $('#form').on('submit', this.formListen);
   },
 
   winNHS: function() {
@@ -214,6 +227,7 @@ var Responder = {
 
   isHighScore: function(score) {
     var curScore = {n: '', s: score};
+    console.log(score, "score");
     highScores.push(curScore);
     highScores = highScores.sort(function(a, b) {
       return a.s-b.s;
@@ -231,19 +245,23 @@ var Responder = {
   },
 
   formListen: function() {
-    var form = document.getElementById('form');
-    form.addEventListener('submit', function(event) {
-      event.preventDefault();
-
-      var n= event.target.username.value;
-      for (var i=0; i < highScores.length; i++) {
-        if (highScores[i].n === '') {
-          highScores[i].n = n.toUpperCase();
-        }
+    event.preventDefault();
+    var n = $('#username').val();
+    console.log(n, "name");
+    for (var i=0; i < highScores.length; i++) {
+      if (highScores[i].n === '') {
+        highScores[i].n = n.toUpperCase();
         localStorage.setItem('scores', JSON.stringify(highScores));
+        webDB.execute(
+          [
+            {
+              'sql': 'INSERT INTO highscores (n, s) VALUES (?, ?);',
+              'data' : [highScores[i].n, highScores[i].s],
+            },
+          ]);
         window.location = 'scores.html';
       }
-    });
+    }
   }
 };
 
@@ -255,6 +273,3 @@ init();
 setTimeout(function(){
   Shuffler.runGame();
 }, 500);
-
-checkLocal();
-makeTable();

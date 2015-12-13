@@ -7,7 +7,7 @@ var Profile = function(title, img, body){
 };
 
 var getTemplate = function() {
-  $.get('template.html').done(function(data, msg, xhr) {
+  $.get('../template.html').done(function(data, msg, xhr) {
     Profile.prototype.template = Handlebars.compile(data);
     createProfiles();
   });
@@ -20,7 +20,7 @@ Profile.prototype.toHTML = function() {
 };
 
 createProfiles = function() {
-  $.getJSON('profiles.json')
+  $.getJSON('../profiles.json')
   .fail(function(message) {
     console.log('error', message);
   })
